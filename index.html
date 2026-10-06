@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#050914">
+<meta name="description" content="CJ AI STORE - Android Apps">
+<title>CJ AI STORE</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:Arial,Helvetica,sans-serif;color:#f5f8ff;background:#030712;min-height:100vh;overflow-x:hidden}
+body:before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.34;background-image:linear-gradient(rgba(33,150,243,.08) 1px,transparent 1px),linear-gradient(90deg,rgba(33,150,243,.08) 1px,transparent 1px);background-size:42px 42px;z-index:-1}
+body:after{content:"";position:fixed;width:600px;height:600px;left:50%;top:45%;transform:translate(-50%,-50%);background:radial-gradient(circle,rgba(33,150,243,.14),transparent 65%);pointer-events:none;z-index:-1}
+.navbar{position:sticky;top:0;z-index:20;background:rgba(3,7,18,.88);backdrop-filter:blur(14px);border-bottom:1px solid rgba(33,150,243,.15)}
+.nav-inner{max-width:1180px;margin:auto;padding:22px 38px;display:flex;align-items:center;justify-content:space-between}
+.logo{font-size:28px;font-weight:900;letter-spacing:4px;color:#fff;text-decoration:none}.logo span{color:#2196f3}
+.nav-links{display:flex;gap:12px}.nav-links button{background:none;border:0;color:#aebbd0;font-weight:800;font-size:16px;padding:10px 14px;cursor:pointer}.nav-links button:hover{color:#2196f3}
+.page{display:none}.page.active{display:block}
+.hero{max-width:1180px;margin:auto;min-height:720px;padding:105px 38px 70px;display:grid;grid-template-columns:1.05fr .95fr;align-items:center;gap:30px}
+.badge{display:inline-flex;align-items:center;gap:12px;border:1px solid rgba(33,150,243,.55);border-radius:999px;padding:13px 22px;color:#78bcff;font-weight:800;letter-spacing:2px;background:rgba(33,150,243,.07);box-shadow:0 0 28px rgba(33,150,243,.1)}
+.badge-dot{width:14px;height:14px;border-radius:50%;background:#2196f3;box-shadow:0 0 18px #2196f3}
+.hero h1{font-size:clamp(55px,7vw,92px);line-height:.92;margin:45px 0 30px;letter-spacing:-4px}.hero h1 span{color:#2196f3;text-shadow:0 0 30px rgba(33,150,243,.25)}
+.hero p{max-width:650px;color:#aab6c9;font-size:22px;line-height:1.65;margin-bottom:35px}
+.hero-buttons,.card-actions{display:flex;gap:14px;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:58px;padding:0 28px;border-radius:14px;text-decoration:none;font-weight:900;letter-spacing:.5px;cursor:pointer;border:1px solid transparent;transition:.2s transform,.2s box-shadow,.2s background}.btn:hover{transform:translateY(-2px)}
+.btn-primary{background:#2196f3;color:#fff;box-shadow:0 10px 35px rgba(33,150,243,.25)}.btn-primary:hover{box-shadow:0 14px 45px rgba(33,150,243,.4)}
+.btn-secondary{background:rgba(3,9,20,.65);color:#fff;border-color:rgba(33,150,243,.55);box-shadow:inset 0 0 25px rgba(33,150,243,.05)}
+.orbit-area{height:500px;position:relative;display:flex;align-items:center;justify-content:center}.orbit{position:absolute;width:390px;height:390px;border:1px solid rgba(33,150,243,.24);border-radius:50%;transform:rotate(-18deg)}.orbit:before{content:"";position:absolute;width:13px;height:13px;border-radius:50%;background:#2196f3;box-shadow:0 0 25px #2196f3;left:32px;top:40px}.orbit.two{width:300px;height:480px;transform:rotate(42deg);border-color:rgba(33,150,243,.16)}.core{width:190px;height:190px;border:1px solid rgba(33,150,243,.6);border-radius:34px;display:flex;align-items:center;justify-content:center;color:#2196f3;font-size:58px;font-weight:900;background:rgba(4,13,28,.8);box-shadow:0 0 70px rgba(33,150,243,.18),inset 0 0 45px rgba(33,150,243,.08)}
+.section{max-width:1180px;margin:auto;padding:85px 38px}.section-title small{color:#2196f3;font-weight:900;letter-spacing:3px}.section-title h2{font-size:52px;margin:10px 0}.section-title p{color:#8f9caf;font-size:18px;margin-bottom:35px}
+.app-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:22px}.app-card{padding:28px;border:1px solid rgba(33,150,243,.2);border-radius:24px;background:linear-gradient(145deg,rgba(9,20,39,.9),rgba(3,8,18,.86));box-shadow:0 20px 60px rgba(0,0,0,.25)}.app-card:hover{border-color:rgba(33,150,243,.5)}
+.app-icon,.big-icon{display:flex;align-items:center;justify-content:center;background:linear-gradient(145deg,#0a2d52,#06101f);border:1px solid rgba(33,150,243,.6);box-shadow:0 0 35px rgba(33,150,243,.14);color:#2196f3;font-weight:900}.app-icon{width:76px;height:76px;border-radius:20px;font-size:28px;margin-bottom:22px}.app-card h3{font-size:27px;margin-bottom:10px}.app-card p{color:#9eabbe;line-height:1.6;margin-bottom:20px}.app-meta{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:24px}.tag{font-size:11px;font-weight:900;color:#76baff;border:1px solid rgba(33,150,243,.3);padding:7px 9px;border-radius:999px}
+.search-box{margin-bottom:28px}.search-box input{width:100%;padding:18px 20px;border-radius:14px;border:1px solid rgba(33,150,243,.3);outline:none;background:#07101f;color:#fff;font-size:17px}.search-box input:focus{border-color:#2196f3;box-shadow:0 0 25px rgba(33,150,243,.1)}
+.details-box{max-width:900px;margin:auto;padding:38px;border:1px solid rgba(33,150,243,.25);border-radius:28px;background:rgba(5,12,25,.88);box-shadow:0 25px 80px rgba(0,0,0,.3)}.details-header{display:flex;align-items:center;gap:22px;margin-bottom:28px}.big-icon{width:100px;height:100px;border-radius:25px;font-size:38px}.details-header h1{font-size:42px}.version{color:#2196f3;margin-top:8px;font-weight:800}.details-description{color:#aab6c9;line-height:1.7;font-size:18px;margin-bottom:30px}.info-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}.info{padding:18px;border:1px solid rgba(33,150,243,.15);border-radius:14px;background:rgba(33,150,243,.035)}.info small{display:block;color:#6d7e96;font-size:11px;font-weight:900;letter-spacing:2px;margin-bottom:7px}.info strong{font-size:16px;overflow-wrap:anywhere}.download-area{margin-top:30px;padding:25px;border-radius:20px;border:1px solid rgba(33,150,243,.25);background:rgba(33,150,243,.05)}.download-area h3{font-size:24px;margin-bottom:8px}.download-area p{color:#9eabbe;line-height:1.6;margin-bottom:20px}
+footer{padding:40px 20px;text-align:center;color:#65748a;border-top:1px solid rgba(33,150,243,.12)}footer strong{color:#2196f3}
+@media(max-width:800px){.nav-inner{padding:20px 20px}.logo{font-size:23px;letter-spacing:3px}.hero{grid-template-columns:1fr;padding:75px 38px 30px;min-height:auto}.hero h1{font-size:58px;margin-top:38px}.hero p{font-size:19px}.orbit-area{height:420px}.section{padding:65px 24px}.section-title h2{font-size:42px}.details-header h1{font-size:31px}.info-grid{grid-template-columns:1fr}.card-actions .btn{flex:1 1 100%}}
+@media(max-width:430px){.hero{padding-left:20px;padding-right:20px}.hero h1{font-size:50px}.hero p{font-size:18px}.btn{width:100%}.orbit{width:310px;height:310px}.orbit.two{width:240px;height:390px}.core{width:155px;height:155px}.nav-links{gap:0}.nav-links button{font-size:14px;padding:8px}}
+</style>
+</head>
+<body>
+<nav class="navbar">
+  <div class="nav-inner">
+    <a href="#" class="logo" onclick="showPage('home');return false;">CJ <span>AI STORE</span></a>
+    <div class="nav-links">
+      <button onclick="showPage('home')">HOME</button>
+      <button onclick="showPage('apps')">APPS</button>
+    </div>
+  </div>
+</nav>
+
+<main id="home" class="page active">
+  <section class="hero">
+    <div>
+      <div class="badge"><span class="badge-dot"></span>CJ AI STORE ONLINE</div>
+      <h1>YOUR APPS.<br><span>YOUR STORE.</span></h1>
+      <p>Welcome to CJ AI STORE — isang futuristic app store para sa mga application na ginawa at inilabas ng CJ.</p>
+      <div class="hero-buttons">
+        <button class="btn btn-primary" onclick="showPage('apps')">EXPLORE APPS</button>
+        <a class="btn btn-secondary apk-download" href="#">DOWNLOAD CJ AI CHAT APP</a>
+      </div>
+    </div>
+    <div class="orbit-area"><div class="orbit"></div><div class="orbit two"></div><div class="core">CJ</div></div>
+  </section>
+  <section class="section">
+    <div class="section-title"><small>FEATURED APP</small><h2>Latest Release</h2><p>Ang pinakabagong available na application.</p></div>
+    <div class="app-grid">
+      <article class="app-card">
+        <div class="app-icon">CJ</div><h3>CJ AI CHAT</h3>
+        <p>Futuristic AI chat application ng CJ. Available ngayon ang latest version v5.</p>
+        <div class="app-meta"><span class="tag">VERSION 5</span><span class="tag">ANDROID</span><span class="tag">APK</span></div>
+        <div class="card-actions"><button class="btn btn-secondary" onclick="showPage('details')">DETAILS</button><a class="btn btn-primary apk-download" href="#">DOWNLOAD APP</a></div>
+      </article>
+    </div>
+  </section>
+</main>
+
+<main id="apps" class="page">
+  <section class="section">
+    <div class="section-title"><small>APPLICATIONS</small><h2>Apps</h2><p>Hanapin at i-explore ang available applications.</p></div>
+    <div class="search-box"><input id="searchInput" type="search" placeholder="Search apps..." oninput="searchApps()"></div>
+    <div class="app-grid" id="appGrid">
+      <article class="app-card" data-name="cj ai chat">
+        <div class="app-icon">CJ</div><h3>CJ AI CHAT</h3><p>AI chat application ng CJ. Latest public release: version 5.</p>
+        <div class="app-meta"><span class="tag">v5</span><span class="tag">ANDROID</span><span class="tag">4.18 MB</span></div>
+        <div class="card-actions"><button class="btn btn-secondary" onclick="showPage('details')">DETAILS</button><a class="btn btn-primary apk-download" href="#">DOWNLOAD APP</a></div>
+      </article>
+    </div>
+  </section>
+</main>
+
+<main id="details" class="page">
+  <section class="section">
+    <div class="details-box">
+      <div class="details-header"><div class="big-icon">CJ</div><div><h1>CJ AI CHAT</h1><div class="version">Latest Version: v5</div></div></div>
+      <p class="details-description">Ang CJ AI CHAT ay isang custom AI chat application na ginawa para sa Android. Ito ang kasalukuyang public release ng application sa CJ AI STORE.</p>
+      <div class="info-grid">
+        <div class="info"><small>APP NAME</small><strong>CJ AI CHAT</strong></div><div class="info"><small>VERSION</small><strong>v5</strong></div>
+        <div class="info"><small>PACKAGE</small><strong>com.cjaichatgreen.util</strong></div><div class="info"><small>FILE SIZE</small><strong>4.18 MB</strong></div>
+        <div class="info"><small>PLATFORM</small><strong>Android</strong></div><div class="info"><small>FORMAT</small><strong>APK</strong></div>
+      </div>
+      <div class="download-area"><h3>Download CJ AI CHAT V5</h3><p>Pindutin ang button sa ibaba para direktang i-download ang latest CJ AI CHAT APK.</p><a class="btn btn-primary apk-download" href="#">DOWNLOAD CJ AI CHAT APP</a></div>
+    </div>
+  </section>
+</main>
+
+<footer><div>© 2026 <strong>CJ AI STORE</strong></div><div style="margin-top:7px;">Powered by CJ</div></footer>
+
+<script>
+const APK_URL = "https://github.com/christjohnwebsite/cj-ai-store-green/releases/download/V5.0.0/CJ_AI_CHAT.apk";
+
+function showPage(pageId){
+  document.querySelectorAll('.page').forEach(function(page){page.classList.remove('active');});
+  const selectedPage=document.getElementById(pageId);
+  if(selectedPage) selectedPage.classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+document.querySelectorAll('.apk-download').forEach(function(link){
+  link.href=APK_URL;
+  link.target='_blank';
+  link.rel='noopener';
+});
+
+function searchApps(){
+  const search=document.getElementById('searchInput').value.toLowerCase().trim();
+  document.querySelectorAll('#appGrid .app-card').forEach(function(card){
+    const name=card.dataset.name||'';
+    card.style.display=name.includes(search)?'':'none';
+  });
+}
+</script>
+</body>
+  </html>
+<!-- Cloudflare deployment trigger -->
